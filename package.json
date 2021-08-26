@@ -1,0 +1,17 @@
+{
+  "name": "smartcity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "smartcity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bme680-sensor": "github:CHH/bme680#bme688",
+    "ejs": "^3.1.6",
+    "lodash": "^4.17.21",
+    "numbro": "^2.3.5"
+  }
+}

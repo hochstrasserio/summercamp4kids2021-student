@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="display-1 my-4">
+            Christoph's Smart City
+        </h1>
+
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Luftfeuchtigkeit</h5>
+                    <p class="card-text display-2">
+                        <%= Math.round(data[0].humidity * 100) / 100 %>
+                    </p>
+                    <p class="card-text lead text-muted">
+                        %RH
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Temperatur</h5>
+                    <p class="card-text display-2">
+                        <%= data[0].temperature %>
+                    </p>
+                    <p class="card-text lead text-muted">
+                        ºC
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Luftqualität</h5>
+                    <% if (data[0].gasResistance >= 100000) { %>
+                        <p class="card-text display-2 text-success">
+                            Gut
+                        </p>
+                        <% } else if (data[0].gasResistance >= 50000 && data[0].gasResistance < 100000) { %>
+                        <p class="card-text display-2 text-warning">
+                            Mittel
+                        </p>
+                        <% } else { %>
+                        <p class="card-text display-2 text-danger">
+                            Schlecht
+                        </p>
+                    <% } %>
+                    <p class="card-text lead text-muted">
+                        <%= Math.round(data[0].gasResistance * 100) / 100 %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Zeit</th>
+                    <th class="text-end">Luftfeuchtigkeit</th>
+                    <th class="text-end">Temperatur</th>
+                    <th class="text-end">Luftreinheit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const line of data) { %>
+                    <% if (line) { %>
+                    <tr>
+                        <td>
+                            <%= new Date(line.timestamp).toLocaleString('de') %>
+                        </td>
+                        <td class="text-end">
+                            <%= Math.round(line.humidity * 100) / 100 %> %RH
+                        </td>
+                        <td class="text-end">
+                            <%= line.temperature %> ºC
+                        </td>
+                        <td class="text-end">
+                            <%= Math.round(line.gasResistance * 100) / 100 %> Ohm
+                        </td>
+                    </tr>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>
